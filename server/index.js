@@ -26,7 +26,11 @@ async function main() {
   await connect();
 
   app.get("/", (req, res) => {
-    res.send("Hello!");
+    res.send("Hellos!");
+  });
+
+  app.get("/task", (req, res) => {
+    res.send("Task!");
   });
 
   app.listen(port, "0.0.0.0", () => {
