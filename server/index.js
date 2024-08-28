@@ -121,3 +121,22 @@ async function doQuery(query) {
     if (conn) conn.end();
   }
 }
+
+/*
+
+> Completion Status
+> Tasks can be either complete or incomplete. When we do our API calls for the pie graphs, the client should be able to specify if they want to include completed tasks, incomplete tasks, or both.
+> For example: if we’re doing average costs for tasks, incomplete tasks will throw off the average because they don’t give an idea of what the final cost will be.
+
+--
+
+I'm thinking we could add a new column to the task table to indicate if it's completed or not (e.g. a boolean column, `completed`)
+
+- After logging a certain amount of time on a task, a worker can mark it as `completed`.
+- There could be a timespan (possibly another column) that specifies when the task will be flipped back to the incomplete state.
+    - A `frequency` column to indicate the frequency during which the task should be worked on.
+    - e.g.  A task has a 1-week frequency. A worker logs time on the task then marks it as `completed`.
+            After `frequency` passes (1 week), we set its `completed` status to `false`.
+- This would let a worker know that they need to work on the task again.
+
+*/
